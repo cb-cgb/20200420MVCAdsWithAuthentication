@@ -1,0 +1,42 @@
+﻿
+
+@if (!User.Identity.IsAuthenticated)
+{ 
+     @if(TempData["Message"] == null)
+     {
+         TempData["Message"] = "You  must log in to post or delete Ads";
+     }
+    
+}
+
+ @if (TempData["Message"] != null)
+{
+    <div id="alert" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @TempData["Message"]
+    </div>
+}
+
+
+
+<div class="container" style="margin-bottom:30px">
+    <h1 class="text-center">Login</h1>
+    <div class="col-md-6 col-md offset-3">
+
+
+        <div class="row text-center">
+            <form method="Post" action="/Account/Login">
+                <input type="text" class="form-control" name="email" placeholder="Enter your email" />
+                <input type="password" class="form-control" name="passwordhash" placeholder="Enter your password" />
+
+                <button class="btn btn-lg btn-info">Login</button>
+            </form>
+        </div>
+
+        <h4> Not yet registered?  <a href="/Account/SignupForm">Click here!</a></h4>
+
+    </div>
+</div>

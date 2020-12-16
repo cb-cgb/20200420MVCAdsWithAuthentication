@@ -1,0 +1,19 @@
+﻿@*//@model Ad;
+//@using AdsAuth.Data;*@
+
+
+<div class="text-center">
+    <h2>New Ad</h2>
+</div>
+
+<div class="container" style=margin-top:30px>
+     
+     <form method="Post"action="/Home/Addad">
+       <input type="text" class="form-control" name="title" placeholder="Ad Description" />
+       <input type="text" class="form-control" name="Phone"  placeholder="Phone" />
+       <textarea rows=10 class="form-control" name="Text" > Text required </textarea>
+         <button class="btn btn-success">Post Ad!</button>
+     </form>
+     
+     
+ </div>

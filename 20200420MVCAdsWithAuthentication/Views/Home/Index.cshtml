@@ -1,0 +1,73 @@
+﻿@using AdsAuth.Data;
+@model HomeViewModel;
+
+
+
+@if (TempData["Message"] != null)
+{
+    <div id="alert" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @TempData["Message"]
+    </div>
+}
+
+
+@if (TempData["success-message"] != null)
+{
+    <div id="alert" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @TempData["success-message"]
+    </div>
+}
+
+
+<div class="text-center">
+    <h1>Posted Ads</h1>
+</div>
+
+<div class="row">
+
+    <a href="/Home/NewAdForm" class="btn btn-success">New Ad</a>
+
+    <table class="table table-bordered table-striped style=margin-top:20px">
+        <tr>
+            <th>Title</th>
+            <th>Phone</th>
+            <th>Text</th>
+            <th>Posted By</th>
+            <th></th>
+        </tr>
+
+        @foreach (Ad a in Model.Ads)
+        {
+            <tr>
+                <td>@a.Title</td>
+                <td>@a.Phone</td>
+                <td>
+                    <textarea rows="10">@a.Text</textarea>
+                </td>
+                <td>Posted by: @a.UserId @a.PostedBy  Current User: @Model.CurrentUser - @User.Identity.Name</td>
+                <td>
+                    @if (Model.CurrentUser == a.UserId)
+                    {
+                        <form method="post" action="/Home/DeleteAd">
+                            <input type="hidden" name="Id" value="@a.Id" />
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    }
+
+                </td>
+
+            </tr>
+
+        }
+    </table>
+
+</div>
+
